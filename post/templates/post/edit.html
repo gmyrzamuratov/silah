@@ -1,0 +1,291 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css" rel="stylesheet">
+<link type="text/css" href="{% static 'post/css/tui-image-editor.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link id="themecss" rel="stylesheet" type="text/css" href="https://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<div class="container">
+<h2>Edit word</h2>
+<form action="{% url 'post:update' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="form-group">
+		{{ form.content.label_tag }}
+		{{ form.content }}
+        {{ form.content.errors }}
+		<small id="contentHelp" class="form-text text-muted">Enter content.</small>
+	</div>
+	<div style="margin-bottom: 20px;">
+		<button type="button" class="btn btn-success js-upload-photos">
+			<span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
+		</button>
+		<input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'post:uploadPhoto' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    </div>
+	<table id="gallery" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+                <th></th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Image</th>
+				<th></th>
+                <th></th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for photo in postPhotos %}
+		<tr>
+            <td><i class="fas fa-bars" style="color:#bbb; cursor:move;"></i></td>
+			<td>{{photo.photo.id}}</td>
+			<td><a href='{{photo.photo.file.url}}'>{{photo.photo.file.name}}</a></td>
+			<td><img id="image_{{photo.photo.id}}" style='width:100px; height:100px;' src='{{photo.photo.file.url}}'></td>
+			<td><button data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}' type="button" class="btn btn-primary js-edit-photos" onclick="initImageEditor('{{photo.photo.file.url}}', 
+			'{{photo.photo.file.name}}', {{photo.photo.id}});"><span class="glyphicon glyphicon-cloud-upload"></span>Edit</button></td>
+            <td><button data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}' type="button" class="btn btn-primary js-edit-watermark" onclick="initWatermarkEditor('{{photo.photo.file.url}}', 
+            '{{photo.photo.file.name}}', {{photo.photo.id}});"><span class="glyphicon glyphicon-cloud-upload"></span>Watermark</button></td>
+			<td><button type="button" class="btn btn-danger js-delete-photos"><span class="glyphicon glyphicon-cloud-upload"></span>Delete</button></td>
+		</tr>
+		{% endfor %}
+        </tbody>
+    </table>
+    <style>
+        /* table styles */
+        #gallery { width: 60%; }
+        #gallery tr { cursor: move; }
+        #gallery td { vertical-align: middle; }
+        #gallery tr td:first-child { width: 80px; }
+        #gallery tr td:nth-child(2) { text-align: right; }
+
+        /* drag styles */
+        .dragged { background-color: white; color: white; border-color: white; }
+        .dragged td * { visibility: hidden; }
+    </style>
+    <br>
+    <div style="margin-bottom: 20px;">
+        <button type="button" class="btn btn-primary js-upload-videos">
+            <span class="glyphicon glyphicon-cloud-upload"></span> Upload video
+        </button>
+        <input id="videoupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'post:uploadVideo' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    </div>
+    <table id="videoList" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Video</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for video in postVideos %}
+        <tr>
+            <td>{{video.video.id}}</td>
+            <td><a href='{{video.video.file.url}}'>{{video.video.file.name}}</a></td>
+            <td>
+                <video id="video_{{video.video.id}}" style='max-width: 50%;' src='{{video.video.file.url}}' controls>
+                </td>
+            <td><button type="button" class="btn btn-primary js-delete-video"><span class="glyphicon glyphicon-cloud-upload"></span>Delete</button></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="form-group">
+       <small id="publish_atHelp" class="form-text text-muted">Schedule.</small>
+       <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+          {{ form.publish_at }}
+          <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+          <div class="input-group-text" onclick="clearScheduler();"><i class="fa fa-times"></i></div>
+       </div>
+       {{ form.publish_at.errors }}
+    </div>
+	{{ form.id }}
+	{{ form.photos }}
+    {{ form.videos }}
+	<button type="submit" name="saveButton" class="btn btn-primary" id="submitButton">Post Now</button>
+	<button type="button" onclick="history.go(-1)" class="btn btn-secondary">Cancel</button>
+</form>
+
+<div class="image-editor-popup">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">&times;</div>
+        <div id="tui-image-editor-container"></div>
+        <button style="margin-top: 10px;"  class="btn btn-primary" onclick="saveEditedImage()">Save</button>
+    </div>
+</div>
+
+<div class="watermark-editor-popup">
+    <span class="helper"></span>
+    <div>
+        <div class="watermarkCloseButton">&times;</div>
+        <input type="file" name="wtFile" onchange="onUploadWatermark()" style="margin-bottom: 15px;">
+        <div id="watermarkImage">
+        </div>
+        <button style="margin-top: 10px;"  class="btn btn-primary" onclick="saveWtEditedImage()">Save</button>
+    </div>
+</div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.0/fabric.js"></script>
+        <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
+        <script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+        <script type="text/javascript" src="{% static '/post/js/tui-image-editor.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/theme/white-theme.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/theme/black-theme.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/watermark.js' %}"></script>
+        <script>
+         // Image editor
+         var imageEditor = null;
+         var editedPhotoFilename = '';
+         var editedPhotoId = '';
+         var editedPhotoUrl = '';
+         function initImageEditor(photoURL, photoFilename, photoId) {
+
+         	editedPhotoFilename = photoFilename;
+         	editedPhotoId = photoId;
+
+         	imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+         		includeUI: {
+                 loadImage: {
+                     path: photoURL,
+                     name: 'SampleImage'
+                 },
+                 theme: blackTheme, // or whiteTheme
+                 initMenu: 'filter',
+                 menuBarPosition: 'bottom'
+             },
+             cssMaxWidth: 700,
+             cssMaxHeight: 700,
+             usageStatistics: false
+         });
+         window.onresize = function() {
+             //imageEditor.ui.resizeEditor();
+         }
+         }
+
+        function clearScheduler() {
+
+            var id_publish_at = document.getElementById('id_publish_at');
+            id_publish_at.value = '';
+
+            var submitButton = document.getElementById('submitButton');
+            submitButton.textContent = 'Post Now';
+
+        }
+
+         function initWatermarkEditor(photoURL, photoFilename, photoId) {
+
+            editedPhotoUrl = photoURL;
+            editedPhotoFilename = photoFilename;
+            editedPhotoId = photoId;
+
+            var img = document.createElement('img');
+            img.id="wtImg"; 
+            img.src = photoURL;
+            var divWt = document.getElementById("watermarkImage");
+            divWt.innerHTML = '';
+            divWt.appendChild(img);
+            img.style.width = '80%';
+
+         }
+
+         function onUploadWatermark() {
+
+            var upload = document.querySelector('input[name=wtFile]').files[0];
+            watermark([editedPhotoUrl, upload])
+            .image(watermark.image.lowerRight(0.5))
+            .then(function (img) {
+                var divWt = document.getElementById("watermarkImage");
+                divWt.innerHTML = '';
+                divWt.appendChild(img);
+                img.id="wtImg"; 
+                img.style.width = '80%';
+            });
+
+         }
+
+         function saveEditedImage() {
+
+         	$.ajax({
+         		type: "POST",
+         		url: "{% url 'post:uploadPhotoData' %}",
+         		data: {
+         			'imageStream':imageEditor.toDataURL(),
+         			'imageId':editedPhotoId,
+         			'imageFilename':editedPhotoFilename,
+         			'csrfmiddlewaretoken': '{{ csrf_token }}' 
+         		},
+         		success: function(result) {
+         			if(result['is_valid']){
+         				document.getElementById('image_'+editedPhotoId).setAttribute('src', imageEditor.toDataURL());
+                        $('.image-editor-popup').hide();
+         			}
+         		}
+         	});
+
+         }
+
+         function saveWtEditedImage() {
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'post:uploadPhotoData' %}",
+                data: {
+                    'imageStream':document.getElementById('wtImg').getAttribute('src'),
+                    'imageId':editedPhotoId,
+                    'imageFilename':editedPhotoFilename,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' 
+                },
+                success: function(result) {
+                    if(result['is_valid']){
+                        document.getElementById('image_'+editedPhotoId).setAttribute('src', document.getElementById('wtImg').getAttribute('src'));
+                        $('.watermark-editor-popup').hide();
+                    } else {
+                        alert("Photo is not valid");
+                    }
+                }
+            });
+
+         }
+        </script>
+</div>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+{% if user.is_authenticated %}
+  <script src="{% static 'post/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'post/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'post/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+  <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+  <script src="{% static 'post/js/upload.js' %}"></script>
+  <script src="{% static 'post/js/image-editor.js' %}"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker').datetimepicker();
+  });
+  $('#datetimepicker').on("change.datetimepicker", function(e) {
+    var submitButton = document.getElementById('submitButton');
+    submitButton.textContent = 'Schedule Post';
+  });
+</script>
+
+{% endif %}  
+{% endblock %}

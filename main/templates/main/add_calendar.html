@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<div class="container">
+<h2>Add Google Calendar</h2>
+<form action="{% url 'main:insert_calendar' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="form-group">
+		{{ form.frame.label_tag }}
+		{{ form.frame }}
+		{{ form.frame.errors }}
+		<small id="titleHelp" class="form-text text-muted">Enter frame code.</small>
+	</div>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Where to get iframe code?
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+      	<ul>
+      		<li>Get frame code. How to get <a href="https://support.google.com/calendar/answer/41207?hl=en" target="_blank">Instruction</a></li>
+      		<li>Copy iframe code and paste in frame field</li>
+      		<li>For Safari users:</li>
+      		<li>Go to Safari preferences</li>
+      		<li>On Privacy tab uncheck 'Prevent cross-site tracking'</li>
+      	</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+	<button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+	<button type="button" onclick="history.go(-1)" class="btn btn-secondary">Cancel</button>
+</form>
+</div>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+{% endblock %}

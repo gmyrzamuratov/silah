@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+{% if user.is_authenticated %}
+<h2 style="margin: 20px 0;">Projects</h2>
+<a class="btn btn-primary" href="{% url 'project:new' %}">Create</a>
+<ul style="margin-top: 10px;" class="list-group">
+    {% for project in projects %}
+	<li class="list-group-item"><a href="{% url 'project:detail' project.id %}">{{project.title}}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+</div>
+
+{% endblock %}

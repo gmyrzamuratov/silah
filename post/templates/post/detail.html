@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+{% if user.is_authenticated %}
+<a style="margin-top: 10px;" class="btn btn-primary" href="{% url 'post:edit' data.id %}">Edit</a>
+<p style="margin-top: 10px;">{{data.content}}</p>
+<table id="gallery" class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Image</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for photo in photos %}
+		<tr>
+			<td>{{photo.photo.id}}</td>
+			<td><a href='{{photo.photo.file.url}}'>{{photo.photo.file.name}}</a></td>
+			<td><img style='width:100px; height:100px;' src='{{photo.photo.file.url}}'></td>
+		</tr>
+		{% endfor %}
+    </tbody>
+</table>
+<br>
+<table id="videoList" class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Video</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for video in videos %}
+		<tr>
+			<td>{{video.video.id}}</td>
+			<td><a href='{{video.video.file.url}}'>{{video.video.file.name}}</a></td>
+			<td>
+				<video style="max-width: 50%;" controls>
+					<source src = "{{video.video.file.url}}" type = "video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</td>
+		</tr>
+		{% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+</div>
+
+{% endblock %}

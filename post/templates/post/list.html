@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+{% if user.is_authenticated %}
+<h2 style="margin: 20px 0;">Posts</h2>
+<a class="btn btn-primary" href="{% url 'post:new' project %}">Create</a>
+<ul style="margin-top: 10px;" class="list-group">
+    {% for post in posts %}
+	<li class="list-group-item"><a href="{% url 'post:detail' post.id %}">{{post.content}}</a></li>
+	{% endfor %}
+</ul>
+
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+</div>
+
+{% endblock %}

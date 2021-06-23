@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+{% if user.is_authenticated %}
+<h2 style="margin: 20px 0;">{{data.title}}</h2>
+<a class="btn btn-success" href="{% url 'post:new' data.id %}">Create post</a>
+<a class="btn btn-primary" href="{% url 'project:edit' data.id %}">Edit project</a>
+<a class="btn btn-primary" href="{% url 'project:profiles' data.id %}">Profiles</a>
+<ul style="margin-top: 10px;" class="list-group">
+    {% for post in posts %}
+	<li class="list-group-item"><a href="{% url 'post:detail' post.id %}">{{post.content}}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+2020-11-11 15:58:17,557 - instabot version: 0.117.0 (bot /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot.py:279) - INFO - Instabot version: 0.117.0 Started
+2020-11-11 15:58:17,558 - instabot version: 0.117.0 (bot /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot.py:280) - DEBUG - Bot imported from /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot.py
+2020-11-11 15:58:17,558 - instabot version: 0.117.0 (api_login /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api_login.py:342) - DEBUG - Loading cookies
+2020-11-11 15:58:17,558 - instabot version: 0.117.0 (api_login /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api_login.py:351) - DEBUG - Loading uuids
+2020-11-11 15:58:17,559 - instabot version: 0.117.0 (api_login /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api_login.py:367) - INFO - Recovery from /Users/gmyrzamuratov/Dropbox/Projects/upwork/Silah/posting/config/sazalem_com_uuid_and_cookie.json: COOKIE True - UUIDs True - TIMING, DEVICE and ...
+- user-agent=Instagram 117.0.0.28.123 Android (28/9.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A3003; OnePlus3; qcom; en_US; 180322800)
+- phone_id=5752b413-911c-4fa9-8c54-7a0c9b72706a
+- uuid=5888f2d1-60de-43f9-b23f-9f199e351202
+- client_session_id=cbf29a23-6d03-4f6e-9958-d2d28b99dd1e
+- device_id=android-13de98513d4602f9
+2020-11-11 15:58:17,559 - instabot version: 0.117.0 (api_login /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api_login.py:133) - INFO - LOGIN FLOW! Just logged-in: False
+2020-11-11 15:58:18,974 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:546) - DEBUG - POST to endpoint: feed/timeline/ returned response: <Response [200]>
+2020-11-11 15:58:20,020 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:546) - DEBUG - POST to endpoint: feed/reels_tray/ returned response: <Response [200]>
+2020-11-11 15:58:20,021 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:415) - INFO - Logged-in successfully as 'sazalem_com'!
+2020-11-11 15:58:20,021 - instabot version: 0.117.0 (bot_checkpoint /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot_checkpoint.py:58) - DEBUG - Loading Checkpoint file from: /Users/gmyrzamuratov/Dropbox/Projects/upwork/Silah/posting/config/sazalem_com.checkpoint
+2020-11-11 15:59:15,284 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:546) - DEBUG - POST to endpoint: media/configure_sidecar/? returned response: <Response [500]>
+2020-11-11 15:59:15,284 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:561) - DEBUG - Responsecode indicates error; response content: b'{"message": "Unknown Server Error.", "status": "fail"}'
+2020-11-11 15:59:15,285 - instabot version: 0.117.0 (api /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/api/api.py:567) - ERROR - Request returns 500 error!
+2020-11-11 15:59:15,285 - instabot version: 0.117.0 (bot_photo /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot_photo.py:65) - INFO - Photos are not uploaded.
+2020-11-11 16:08:27,209 - instabot version: 0.117.0 (bot_checkpoint /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot_checkpoint.py:48) - DEBUG - Saving Checkpoint file to: /Users/gmyrzamuratov/Dropbox/Projects/upwork/Silah/posting/config/sazalem_com.checkpoint
+2020-11-11 16:08:27,210 - instabot version: 0.117.0 (bot /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/instabot/bot/bot.py:482) - INFO - Total requests: 23

@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<div class="container">
+<h2>Calendar</h2>
+<a style="margin: 10px 0;" class="btn btn-primary" href="{% url 'main:add_calendar' %}">Add</a>
+<br>
+{{ calendarCode|safe }}
+</div>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+{% endblock %}

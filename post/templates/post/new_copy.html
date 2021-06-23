@@ -1,0 +1,427 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css" rel="stylesheet">
+<link type="text/css" href="{% static 'post/css/tui-image-editor.css' %}" rel="stylesheet">
+<link type="text/css" href="{% static 'post/css/image-picker/image-picker.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link id="themecss" rel="stylesheet" type="text/css" href="https://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<div class="container">
+<h2 style="margin: 20px 0;">Create new post</h2>
+<form action="{% url 'post:insert' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.project }}
+	{{ form.photos }}
+	{{ form.videos }}
+	<div class="form-group">
+		{{ form.content.label_tag }}
+		{{ form.content }}
+		{{ form.content.errors }}
+		<small id="titleHelp" class="form-text text-muted">Enter content.</small>
+	</div>
+	<div style="margin-bottom: 20px;">
+		<button type="button" class="btn btn-primary js-upload-photos">
+			<span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
+		</button>
+		<input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'post:uploadPhoto' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ragicModal" onclick="loadRagicImages(1)">
+        Import from Wordpress
+        </button>
+    </div>
+	  <table id="gallery" class="table table-bordered">
+      <thead>
+			<tr>
+        <th></th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Image</th>
+				<th></th>
+				<th></th>
+				<th>Action</th>
+			</tr>
+      </thead>
+		  <tbody>
+      </tbody>
+    </table>
+    <style>
+        /* table styles */
+        #gallery { width: 60%; }
+        #gallery tr { cursor: move; }
+        #gallery td { vertical-align: middle; }
+        #gallery tr td:first-child { width: 80px; }
+        #gallery tr td:nth-child(2) { text-align: right; }
+
+        /* drag styles */
+        .dragged { background-color: white; color: white; border-color: white; }
+        .dragged td * { visibility: hidden; }
+    </style>
+	<div style="margin-bottom: 20px;">
+		<button type="button" class="btn btn-primary js-upload-videos">
+			<span class="glyphicon glyphicon-cloud-upload"></span> Upload video
+		</button>
+		<input id="videoupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'post:uploadVideo' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    </div>
+	<table id="videoList" class="table table-bordered">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Video</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+        </tbody>
+    </table>
+  <div class="form-group">
+    <small id="publish_atHelp" class="form-text text-muted">Schedule.</small>
+    <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+      {{ form.publish_at }}
+      <!--
+      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker" />-->
+      <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+      </div>
+      <div class="input-group-text" onclick="clearScheduler();"><i class="fa fa-times"></i></div>
+    </div>
+    {{ form.publish_at.errors }}
+  </div>
+
+	<button type="submit" class="btn btn-primary" id="submitButton">Post Now</button>
+	<button type="button" onclick="history.go(-1)" class="btn btn-secondary">Cancel</button>
+</form>
+<div class="image-editor-popup">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">&times;</div>
+        <div id="tui-image-editor-container"></div>
+        <button style="margin-top: 10px;"  class="btn btn-primary" onclick="saveEditedImage()">Save</button>
+    </div>
+</div>
+
+<div class="watermark-editor-popup">
+    <span class="helper"></span>
+    <div>
+        <div class="watermarkCloseButton">&times;</div>
+        <input type="file" name="wtFile" onchange="onUploadWatermark()" style="margin-bottom: 15px;">
+        <div id="watermarkImage">
+        </div>
+        <button style="margin-top: 10px;"  class="btn btn-primary" onclick="saveWtEditedImage()">Save</button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ragicModal" tabindex="-1" aria-labelledby="ragicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ragicModalLabel">Ragic images</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group" style="margin-bottom: 20px;">
+            <input type="text" class="form-control" id="ragicSearch">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" onclick="loadRagicImages(1);">Search</button>
+            </div>
+        </div>
+        <table id="ragicImagesChooseList" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>   
+          </tbody>
+        </table>
+        <ul class="list-group" id="">
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="mr-auto">
+        <button type="button" class="btn btn-primary" onclick="prevPage();">Prev</button>
+        <button type="button" class="btn btn-primary" onclick="nextPage();">Next</button>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--
+        <button type="button" class="btn btn-primary">Save changes</button>
+      -->
+      </div>
+    </div>
+  </div>
+</div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.0/fabric.js"></script>
+        <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
+        <script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+        <script type="text/javascript" src="{% static '/post/js/tui-image-editor.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/theme/white-theme.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/theme/black-theme.js' %}"></script>
+        <script type="text/javascript" src="{% static '/post/js/watermark.js' %}"></script>
+        <script>
+         // Image editor
+         var imageEditor = null;
+         var editedPhotoFilename = '';
+         var editedPhotoId = '';
+         var editedPhotoUrl = '';
+         function initImageEditor(photoURL, photoFilename, photoId) {
+
+         	editedPhotoFilename = photoFilename;
+         	editedPhotoId = photoId;
+
+         	imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+         		includeUI: {
+                 loadImage: {
+                     path: photoURL,
+                     name: 'SampleImage'
+                 },
+                 theme: blackTheme, // or whiteTheme
+                 initMenu: 'filter',
+                 menuBarPosition: 'bottom'
+             },
+             cssMaxWidth: 700,
+             cssMaxHeight: 700,
+             usageStatistics: false
+         });
+         window.onresize = function() {
+             //imageEditor.ui.resizeEditor();
+         }
+         }
+
+         function initWatermarkEditor(photoURL, photoFilename, photoId) {
+
+            editedPhotoUrl = photoURL;
+            editedPhotoFilename = photoFilename;
+            editedPhotoId = photoId;
+
+            var img = document.createElement('img');
+            img.id="wtImg"; 
+            img.src = photoURL;
+            var divWt = document.getElementById("watermarkImage");
+            divWt.innerHTML = '';
+            divWt.appendChild(img);
+            img.style.width = '80%';
+
+         }
+
+         function onUploadWatermark() {
+
+            var upload = document.querySelector('input[name=wtFile]').files[0];
+            watermark([editedPhotoUrl, upload])
+            .image(watermark.image.lowerRight(0.5))
+            .then(function (img) {
+                var divWt = document.getElementById("watermarkImage");
+                divWt.innerHTML = '';
+                divWt.appendChild(img);
+                img.id="wtImg"; 
+                img.style.width = '80%';
+            });
+
+         }
+
+
+         function saveEditedImage() {
+
+         	$.ajax({
+         		type: "POST",
+         		url: "{% url 'post:uploadPhotoData' %}",
+         		data: {
+         			'imageStream':imageEditor.toDataURL(),
+         			'imageId':editedPhotoId,
+         			'imageFilename':editedPhotoFilename,
+         			'csrfmiddlewaretoken': '{{ csrf_token }}' 
+         		},
+         		success: function(result) {
+         			if(result['is_valid']){
+         				document.getElementById('image_'+editedPhotoId).setAttribute('src', imageEditor.toDataURL());
+                        $('.image-editor-popup').hide();
+         			}
+         		}
+         	});
+
+         }
+
+         function saveWtEditedImage() {
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'post:uploadPhotoData' %}",
+                data: {
+                    'imageStream':document.getElementById('wtImg').getAttribute('src'),
+                    'imageId':editedPhotoId,
+                    'imageFilename':editedPhotoFilename,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' 
+                },
+                success: function(result) {
+                    if(result['is_valid']){
+                        document.getElementById('image_'+editedPhotoId).setAttribute('src', document.getElementById('wtImg').getAttribute('src'));
+                        $('.watermark-editor-popup').hide();
+                    } else {
+                        alert("Photo is not valid");
+                    }
+                }
+            });
+
+         }
+        </script>
+</div>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+{% if user.is_authenticated %}
+  <script src="{% static 'post/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'post/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'post/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+  <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+  <script src="{% static 'post/js/upload.js' %}"></script>
+  <!--<script src="/static/post/js/upload.js?version=7"></script>-->
+  <script src="{% static 'post/js/image-editor.js' %}"></script>
+  <script src="{% static 'post/js/image-picker/image-picker.js' %}"></script>
+  <script type="text/javascript">
+            var page = 1;
+            function clearScheduler() {
+                var id_publish_at = document.getElementById('id_publish_at');
+                id_publish_at.value = '';
+
+                var submitButton = document.getElementById('submitButton');
+                submitButton.textContent = 'Post Now';
+
+            }
+            function clearRagicChooseList() {
+                var new_tbody = document.createElement('tbody');
+                var old_tbody = document.getElementById('ragicImagesChooseList').getElementsByTagName('tbody')[0];
+                old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+            }
+            function prevPage() {
+              page = page - 1;
+              if (page < 0) {
+                page = 0;
+              }
+              loadRagicImages(page);
+            }
+            function nextPage() {
+              page = page + 1;
+              loadRagicImages(page);
+            }
+            function loadRagicImages(_page) {
+
+                page = _page;
+
+                clearRagicChooseList();
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        var tableRef = document.getElementById('ragicImagesChooseList').getElementsByTagName('tbody')[0];
+                        var jsonData = JSON.parse(this.responseText).data;
+                        for (var i = 0 ; i < jsonData.length; i++) {
+                            var newRow   = tableRef.insertRow();
+
+                            var cellId  = newRow.insertCell(0);
+                            var cellImage  = newRow.insertCell(1);
+                            var cellAction = newRow.insertCell(2);
+
+                            var newText  = document.createTextNode(jsonData[i]['id']);
+                            cellId.appendChild(newText);
+
+                            var selectImg = document.createElement("SELECT");
+                            selectImg.id="selectImg_"+i;
+                            selectImg.classList.add('image-picker');
+                            selectImg.classList.add('select-image');
+
+                            var selectAtt = document.createAttribute("multiple");
+                            selectAtt.value = "multiple";
+                            selectImg.setAttributeNode(selectAtt);
+
+                            jsonImages = jsonData[i]['images'];
+                            for(imageIndex in jsonImages) {
+
+                                if (jsonImages[imageIndex]=='') {
+                                    continue;
+                                }
+
+                                var newImg = document.createElement("option");
+
+                                var optionImageSrc = document.createAttribute("data-img-src");
+                                optionImageSrc.width = 100;
+                                optionImageSrc.height = 100;
+                                optionImageSrc.value = jsonImages[imageIndex];
+                                newImg.setAttributeNode(optionImageSrc);
+
+                                var optionValue = document.createAttribute("value");
+                                optionValue.value = imageIndex;
+                                newImg.setAttributeNode(optionValue);
+
+                                selectImg.append(newImg);
+                                
+                            }
+
+                            cellImage.appendChild(selectImg);
+
+                            stringImages = JSON.stringify(jsonImages);
+
+                            var button = document.createElement('button');
+                            button.innerHTML = 'Add';
+                            button.classList.add("btn");
+                            button.classList.add("btn-success");
+                            button.classList.add("AddImages");
+                            button.setAttribute("img_id", selectImg.id);
+                            button.setAttribute("collection_id", jsonData[i]['collectionID']);
+                            button.setAttribute("csrf_token", '{{ csrf_token }}');
+                            //button.setAttribute("onClick", "addImages('" + selectImg.id + "')");
+                            cellAction.appendChild(button);
+
+                        }
+
+                        $(".select-image").imagepicker();
+
+                    }
+                };
+                //alert('/post/getragicimages/'+collection+'/'+page);
+                var ragicQuery = document.getElementById('ragicSearch').value;
+                if (ragicQuery == '') {
+                    xhttp.open("GET", '/post/getWordpressImages/'+page, true);
+                } else {
+                    clearRagicChooseList();
+                    xhttp.open("GET", '/post/getWordpressImages/'+page+'/'+ragicQuery, true);
+                }
+                xhttp.send();
+            }
+
+</script>
+<!--
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+  <script src="{% static 'post/js/bootstrap-datetimepicker.min.js' %}"></script>
+-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker').datetimepicker({
+      'format': 'MM/DD/YYYY hh:mm A'
+    });
+    $('#datetimepicker').on("change.datetimepicker", function(e) {
+      var submitButton = document.getElementById('submitButton');
+      submitButton.textContent = 'Schedule Post';
+    });
+
+});
+</script>
+{% endif %}  
+{% endblock %}

@@ -1,0 +1,7 @@
+2020-09-20 14:42:33,021 - instabot version: 0.107.0 (bot) - INFO - Instabot version: 0.107.0 Started
+2020-09-20 14:42:33,021 - instabot version: 0.107.0 (api_login) - INFO - PRE-LOGIN FLOW!... 
+2020-09-20 14:42:47,520 - instabot version: 0.107.0 (api) - ERROR - Request returns 400 error!
+2020-09-20 14:42:47,520 - instabot version: 0.107.0 (api) - INFO - Instagram's error message: The password you entered is incorrect. Please try again.
+2020-09-20 14:42:47,520 - instabot version: 0.107.0 (api) - INFO - Error type: bad_password
+2020-09-20 14:42:47,521 - instabot version: 0.107.0 (api) - ERROR - Failed to login!
+2020-09-20 14:42:47,521 - instabot version: 0.107.0 (api) - INFO - Username or password is incorrect.

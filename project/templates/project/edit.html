@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+<div class="container">
+<h2>Edit word</h2>
+<form action="{% url 'project:update' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="form-group">
+		{{ form.title.label_tag }}
+		{{ form.title }}
+        {{ form.title.errors }}
+		<small id="titleHelp" class="form-text text-muted">Enter title.</small>
+	</div>
+	{{ form.id }}
+	<button type="submit" name="saveButton" class="btn btn-primary">Save</button>
+	<button type="button" onclick="history.go(-1)" class="btn btn-secondary">Cancel</button>
+</form>
+</div>
+{% endblock %}

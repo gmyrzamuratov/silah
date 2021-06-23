@@ -1,0 +1,15 @@
+#pip3 install git+https://github.com/tweepy/tweepy.git@refs/pull/929/merge
+oauth2
+google-auth-oauthlib
+google-api-python-client
+facebook-sdk
+requests_toolbelt
+#tweet-splitter
+#scp -r /Users/gmyrzamuratov/Dropbox/Projects/upwork/Silah/posting/post root@207.180.220.215:/var/posting/posting/
+discord-webhook
+#BeautifulSoup4
+djangorestframework
+django-oauth-toolkit
+mysql-python
+hootsweet
+moviepy

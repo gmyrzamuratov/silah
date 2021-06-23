@@ -1,0 +1,400 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% load static %}
+<div class="container">
+{% if user.is_authenticated %}
+<!-- FB -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '354665692257283',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v8.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- FB -->
+<style type="text/css">
+/* Popup box BEGIN */
+.dialog-popup{
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:80%;
+    z-index:10000;
+}
+.dialog-popup .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.dialog-popup > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    /*max-width: 551px;*/
+    min-height: 100px;
+    vertical-align: middle;
+    width: 80%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+}
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
+}
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+/* Popup box BEGIN */	
+</style>
+<h2 style="margin: 20px 0;">Add a social network</h2>
+<div class="row">
+    <div class="col-6">
+    	<div class="list-group">
+    		{% for network in networks %}
+    		<a href="#" class="list-group-item list-group-item-action" onclick="showItem({{network.id}});">{{network.name}}</a>
+    		{% endfor %}
+    	</div>
+    </div>
+    <div id="social_area" class="col-6">
+    	{% for network in networks %}
+    	{% if network.name == 'Facebook' %}
+    	<div id="social_{{network.id}}" style="display: none;">
+    		<fb:login-button 
+    		scope="public_profile,email,pages_show_list,pages_manage_posts" onlogin="checkLoginState();">
+    		</fb:login-button>
+    		<script type="text/javascript">
+    			function checkLoginState() {
+    				FB.getLoginStatus(function(response) {
+    					if (response.status === 'connected') {
+    						userID = response.authResponse.userID;
+                            accessToken = response.authResponse.accessToken;
+    						pageList(accessToken, userID);
+    					}
+    				});
+    			}
+    			function pageList(accessToken, userID) {
+    				FB.api("/" + userID + "/accounts", function (response) {
+    					if (response && !response.error) {
+    						let parsedJSON  = JSON.parse(JSON.stringify(response));
+    						for (i in parsedJSON.data) {
+    							var item = parsedJSON.data[i];
+    							var onClickFunction = "addProfile('" + userID + "','" + accessToken + "', " + item.id + ", '" + item.name + "', '" + item.access_token + "', " + {{network.id}} + ");";
+    							$("#fbPages").prepend('<a href="#" class="list-group-item list-group-item-action" onclick="' + onClickFunction + '">' + item.name + '</a>');
+    						}
+    						$('.dialog-popup').show();
+    					}
+    				}
+    				);
+    			}
+    		</script>
+        </div>
+    	{% endif %}
+        {% if network.name == 'Telegram' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Telegram</h2>
+            <p>In order to be able to do so, you will have first to:</p>
+            <ul>
+                <li>
+                    Create a Telegram public channel
+                </li>
+                <li>
+                    Create a Telegram BOT via <a href="https://core.telegram.org/bots#3-how-do-i-create-a-bot" target="_blank">BotFather</a>
+                </li>
+                <li>
+                    Set the bot as administrator in your channel
+                </li>
+                <li>
+                    Click Resister to enter your token and channel id
+                </li>
+            </ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#telegramModal">
+                Register
+            </button>
+        </div>
+        {% endif %}
+        {% if network.name == 'Youtube' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Youtube</h2>
+            <a role="button" class="btn btn-primary" href="{% url 'project:youtubeauthorize' project_id %}">
+                Register
+            </a>
+        </div>
+        {% endif %}
+        {% if network.name == 'Google Calendar' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Google Calendar</h2>
+            <a role="button" class="btn btn-primary" href="{% url 'project:googlecalendarauthorize' project_id %}">
+                Register
+            </a>
+        </div>
+        {% endif %}
+        {% if network.name == 'Twitter' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Twitter</h2>
+            <a class="btn btn-primary" href="{% url 'project:twitter_login' project_id %}">Login</a>
+        </div>
+        {% endif %}
+        {% if network.name == 'Discord' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Discord</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#discordModal">
+                Register
+            </button>
+        </div>
+        {% endif %}
+        {% if network.name == 'Instagram' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Instagram</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#instagramModal">
+                Register
+            </button>
+        </div>
+        {% endif %}
+        {% if network.name == 'Hootsuite' %}
+        <div id="social_{{network.id}}" style="display: none;">
+            <h2>Hootsuite</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hootsuiteModal">
+                Register
+            </button>
+        </div>
+        {% endif %}
+    	{% endfor %}
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="telegramModal" tabindex="-1" aria-labelledby="telegramModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="telegramModalLabel">Register your telegram channel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="new_telegram_profile_data" action="{% url 'project:insertTelegramProfile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="telegramChannelName">Channel name</label>
+            <input type="text" class="form-control" name="telegramChannelName">
+        </div>
+        <div class="form-group">
+            <label for="telegramChannelId">Channel id</label>
+            <input type="text" class="form-control" name="telegramChannelId">
+        </div>
+        <div class="form-group">
+            <label for="telegramChanelAccessToken">Access token</label>
+            <input type="text" class="form-control" name="telegramChanelAccessToken">
+        </div>
+        <input type="hidden" name="telegramProjectId" value="{{project_id}}">
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addTelegramProfile();">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Discord -->
+<div class="modal fade" id="discordModal" tabindex="-1" aria-labelledby="discordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="telegramModalLabel">Register your Discord webhook</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="new_discord_profile_data" action="{% url 'project:insertDiscordProfile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="discordChannelName">Channel name</label>
+            <input type="text" class="form-control" name="discordChannelName">
+        </div>
+        <div class="form-group">
+            <label for="discordChanelAccessToken">Webhook URL</label>
+            <input type="text" class="form-control" name="discordChanelAccessToken">
+        </div>
+        <input type="hidden" name="discordProjectId" value="{{project_id}}">
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addDiscordProfile();">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Instagram -->
+<div class="modal fade" id="instagramModal" tabindex="-1" aria-labelledby="instagramModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="instagramModalLabel">Register your Instagram</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="new_instagram_profile_data" action="{% url 'project:insertInstagramProfile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="instagramChannelName">Login</label>
+            <input type="text" class="form-control" name="instagramChannelName">
+        </div>
+        <div class="form-group">
+            <label for="instagramChanelAccessToken">Password</label>
+            <input type="text" class="form-control" name="instagramChanelAccessToken">
+        </div>
+        <input type="hidden" name="instagramProjectId" value="{{project_id}}">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addInstagramProfile();">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hootsuite -->
+<div class="modal fade" id="hootsuiteModal" tabindex="-1" aria-labelledby="hootsuiteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="instagramModalLabel">Register your Hootsuite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="new_hootsuite_profile_data" action="{% url 'project:hootsuite_authorize' project_id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="hootsuiteChannelName">Name</label>
+            <input type="text" class="form-control" name="hootsuiteChannelName">
+        </div>
+        <input type="hidden" name="hootsuiteProjectId" value="{{project_id}}">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addHootsuiteProfile();">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="dialog-popup">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton" onclick="$('.dialog-popup').hide();">&times;</div>
+    	<div class="list-group" id="fbPages">
+    		<a href="#" class="list-group-item list-group-item-action">Test</a>
+    	</div>
+    	<form id="new_profile_data" action="{% url 'project:insertprofile' %}" method="post" enctype="multipart/form-data">
+    		{% csrf_token %}
+    		<input type="hidden" name="name">
+    		<input type="hidden" name="project_id" value="{{project_id}}">
+    		<input type="hidden" name="profile_id">
+    		<input type="hidden" name="network_id">
+            <input type="hidden" name="user_id">
+            <input type="hidden" name="user_access_token">
+    		<input type="hidden" name="access_token">
+    	</form>
+    </div>
+</div>
+<script type="text/javascript">
+function showItem(itemNumber) {
+    var chileElements = document.getElementById("social_area").children;
+    for (var i = 0; i < chileElements.length; i++) {
+        if(chileElements[i].id == 'social_'+itemNumber) {
+            chileElements[i].style.display = 'block';
+        } else {
+            chileElements[i].style.display = 'none';
+        }
+    }
+    //c[1].style.backgroundColor = "yellow";
+
+	//var divElement = document.getElementById('social_'+itemNumber);
+	//divElement.style.visibility = 'visible';
+}
+function addProfile(user_id, user_access_token, profile_id, profile_name, access_token, network_id) {
+    $('.dialog-popup').hide();
+	formObject = document.forms['new_profile_data'];
+	formObject.elements['name'].value = profile_name;
+	formObject.elements['profile_id'].value = profile_id;
+    formObject.elements['user_id'].value = user_id;
+    formObject.elements['user_access_token'].value = user_access_token;
+	formObject.elements['access_token'].value = access_token;
+	formObject.elements['network_id'].value = network_id;
+	formObject.submit();
+}
+function addTelegramProfile() {
+    $('#telegramModal').modal('hide');
+    formObject = document.forms['new_telegram_profile_data'];
+    formObject.submit();
+}
+function addDiscordProfile() {
+    $('#discordModal').modal('hide');
+    formObject = document.forms['new_discord_profile_data'];
+    formObject.submit();
+}
+function addInstagramProfile() {
+    $('#instagramModal').modal('hide');
+    formObject = document.forms['new_instagram_profile_data'];
+    formObject.submit();
+}
+function addHootsuiteProfile() {
+    $('#hootsuiteModal').modal('hide');
+    formObject = document.forms['new_hootsuite_profile_data'];
+    formObject.submit();
+}
+</script>
+{% else %}
+<h2>Forbidden</h2>
+{% endif %}
+</div>
+
+{% endblock %}

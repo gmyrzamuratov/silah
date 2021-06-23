@@ -1,0 +1,15 @@
+2020-11-10 17:23:49,561 - instabot version: 0.107.0 (bot) - INFO - Instabot version: 0.107.0 Started
+2020-11-10 17:23:49,562 - instabot version: 0.107.0 (api_login) - INFO - PRE-LOGIN FLOW!... 
+2020-11-10 17:24:03,739 - instabot version: 0.107.0 (api) - INFO - Logged-in successfully as 'sazalem_com'!
+2020-11-10 17:24:03,740 - instabot version: 0.107.0 (api_login) - INFO - LOGIN FLOW! Just logged-in: True
+2020-11-10 17:28:08,439 - instabot version: 0.107.0 (bot) - INFO - Instabot version: 0.107.0 Started
+2020-11-10 17:28:08,441 - instabot version: 0.107.0 (api_login) - INFO - Recovery from /Users/gmyrzamuratov/Dropbox/Projects/upwork/Silah/posting/config/sazalem_com_uuid_and_cookie.json: COOKIE True - UUIDs True - TIMING, DEVICE and ...
+- user-agent=Instagram 117.0.0.28.123 Android (28/9.0; 420dpi; 1080x1920; OnePlus; ONEPLUS A3003; OnePlus3; qcom; en_US; 180322800)
+- phone_id=5752b413-911c-4fa9-8c54-7a0c9b72706a
+- uuid=5888f2d1-60de-43f9-b23f-9f199e351202
+- client_session_id=68afa9e2-6494-493c-8d7c-661409cda48a
+- device_id=android-13de98513d4602f9
+2020-11-10 17:28:08,442 - instabot version: 0.107.0 (api_login) - INFO - LOGIN FLOW! Just logged-in: False
+2020-11-10 17:28:14,360 - instabot version: 0.107.0 (api) - INFO - Logged-in successfully as 'sazalem_com'!
+2020-11-10 17:29:29,775 - instabot version: 0.107.0 (bot) - INFO - Total requests: 2
+2020-11-10 17:29:29,778 - instabot version: 0.107.0 (bot) - INFO - Total requests: 21

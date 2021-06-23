@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3f186a82-52b6-410f-94da-de57917bbe21" name="Default Changelist" comment="Initial">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/posting.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/templates/authentication/signin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/templates/authentication/signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/blacklist.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/comments.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/followed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/friends.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140247419474560.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140247425267360.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140261890847312.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140334477835184.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140469414672704.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140523531844096.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140538002628464.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140600016623360.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140642841471872.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140670319070944.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140670322611296.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140698087315824.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/log/instabot_140698091433744.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/sazalem_com.checkpoint" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/sazalem_com_uuid_and_cookie.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/skipped.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/unfollowed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/whitelist.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/middleware/timezone_middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/migrations/0002_calendar_currentproject.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/migrations/0003_auto_20201029_1641.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/add_calendar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/calendar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/privacypolicy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/timezone.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0002_postimages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0003_image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0004_auto_20200823_0500.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0005_auto_20200823_1742.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0006_postvideos_video.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0007_post_publish_at.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0008_auto_20201001_1830.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0009_auto_20201026_1523.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0010_post_publish_immediately.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0011_auto_20201027_1434.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0012_remove_post_publish_immediately.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0013_postphotos_order.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0014_post_approved.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/0015_projectforwordpress_wordpressposts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/css/image-picker/image-picker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/css/tui-image-editor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/image-editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/image-picker/image-picker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/image-picker/image-picker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/cors/jquery.postmessage-transport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/cors/jquery.xdr-transport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-audio.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-process.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload-video.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.fileupload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/jquery.iframe-transport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/jquery-file-upload/vendor/jquery.ui.widget.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/moment.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/old-upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/require.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/theme/black-theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/theme/white-theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/tui-image-editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/upload_copy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/static/post/js/watermark.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/templates/post/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/templates/post/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/templates/post/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/templates/post/new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/templates/post/new_copy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/posting/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/Google.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0002_project_owner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0003_network_profile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0004_auto_20200908_1643.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0005_auto_20200910_1727.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0006_auto_20200914_1714.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0007_auto_20200914_1737.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/0008_auto_20201010_1813.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/oauth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/add_social_network.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/templates/project/profiles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/token_youtube_v3.pickle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/upload_video.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/youtube.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/youtube.py.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/blacklist.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/comments.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/followed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/friends.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/log/instabot_140525263295872.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/log/instabot_140561033401728.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/sazalem_com.checkpoint" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/sazalem_com_uuid_and_cookie.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/skipped.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/unfollowed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/config/whitelist.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/discordly.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/insta.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/migrations/0002_auto_20201007_1412.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/migrations/0003_publishedposts_profile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/migrations/0004_remove_publishedposts_network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/movie.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/telegram.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/twitter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social_providers/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/split.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/client_id.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/gcalendar_credentials.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/token_calendar_v3.pickle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/token_youtube_v3.pickle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tweepy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweepy/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweepy/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweepy/README.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/tweepy" />
+  </component>
+  <component name="ProjectId" id="1qtAOyIgTv28PykIHwhdHCmLbdl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="posting" type="Python.DjangoServer" factoryName="Django server">
+      <module name="posting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="posting.settings" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="http://127.0.0.1:8000/" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f186a82-52b6-410f-94da-de57917bbe21" name="Default Changelist" comment="" />
+      <created>1617888484846</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617888484846</updated>
+      <workItem from="1617888486296" duration="947000" />
+      <workItem from="1618671212459" duration="882000" />
+      <workItem from="1624463695205" duration="854000" />
+      <workItem from="1624464561691" duration="979000" />
+      <workItem from="1624465559177" duration="559000" />
+      <workItem from="1624466126196" duration="33000" />
+      <workItem from="1624466176426" duration="632000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/tweepy" />
+      <path value="$PROJECT_DIR$/" />
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
